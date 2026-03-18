@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Art[&]Fact — Compagnie de théâtre professionnelle basée à Allauch, près de Marseille. Spectacles jeune public et tout public.">
+<meta property="og:title" content="Art[&]Fact — Compagnie de Théâtre">
+<meta property="og:image" content="images/logo/logo.png">
+<title>Art[&]Fact — Compagnie de Théâtre</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFAklEQVR42tVWTWxbRRCemfdn+zl2ftwktuM4QSakNEKtWgkhqMJPRempEtWLhHrmQsWFIwfcSOXvUgWBihCHChASsit+VCQ40SBoi6hIKU1KkyZN3aQhr7HjxPaLY/u9HQ4kUFVNE6dJJOa0q92d75tvd2YHYAONAZDj3TIbhgRbacyMnNhi0P/A47Q8jjNT5e1DB/nYoQMAABwHWu08PRB4PE6IvYJ5RKv8fPz5N469+IOsSV8DsPHPju5V/csPIjsiivKV958QqTNx2ck9CwWrLCouExRtGgAArjTypijAiYSEiFw5ceKAMsAn6aZrP2BtXgTrzlNLg0pP7fwVAAAMY1VfuM7Imd/saxJA3xJJeyDoygm/do7qK3uFr5SinW17AV7IAjAgIm+sAojAJ0+6cttbbSeVb3QGM1wZyfxGZyefhO/n9FLf9DuIL8wmewxaDbxqAmwkJARg63ez2zc4+4UYt5oL12aHoOSOOZKOzoL9uru+5hTH42Qkk2ItPqtTIDnEzIzuRyKv8nBhn2mWnGKsNb9Y1xjEYPCWHWtX4PhrpaW75Y0nwEcZEdlCd2hqpuTcyNkTk/UNoYVFjeYtOTozag4iokhe2bHmt0XV5DwhMv853nZ1glJnCiVpMOCeE3pjw8XJAn1w+sKnkfeOfGkYhtST7HHW6nfNdSC5YwcyAGTnKXLVp3ekXJ5iQZRx/sJl77i1kNFjrR/xfqajcJSrEXXNBAzDEAAAn313ffxmvbsj2xEsyX8U5FuybIv28Ccff/7ygD8+Rb29vWJTCCxfalKdKc1a/qFQa8N2mp0X6G0AQZXrAID9/U8TQHUEqJr8B2Z87uCj89Me6a9LlYo8rCNc7myUp156/CIA8I9HZrjaslJNFjAkk9Tb1VWubW86lu1oWbi182F/Zntzoa7BnQYAgCGDYdMtziQhQvjM2Luec+nF+v4bHxqJhASJxBb2A8yEABDqv/mK/6tLbwEArJcArWutpwcZAHUbvgEJGQAIkslNixdXIhP7ZcTXfn666R7E6Y4xrgdUCQaDnSsR8vv9DwUCgY7lVPb7/btqa2sfAwC1WiD5HuxFc3NziIj2A8BoJBJpLJfLLUuRNJqmebqmpuYZSZJm0+n0eFNra0s5n++0bXsgFothOp3eq6qq7fP5BjKZzB5JkmYAgB3H2ZXNZhPLGMuA0j3kZq/Xu0+SJNB1HS3LapJlOS+EyAshSkTkBAKBiMvlIsdx3BLzbVVVOzVNG8nlckFVVRVm9luW1a4oSkZRlPzc3Jy0uLhoCyEmlzFWemhi27ZtXkSc1nX9FDOTbdszpmleKxaL80II1ePx0MTEhKlpWjAajbZYlsW2bf80NTU1oShKmojqPB4PEdENZg6Vy+WAqqpZTdNcd4Ov1JL9uykcDrcQUTMzDwEASJLEbW1tMDIy4q2rq8uVy2UcHR21g8GgFgqFKgAA6XRaVxRFHD58uNDX1+dzuVwV0zStaDTqSqVSi2vtCREApHA4vIeZrxFRSJKkBiKyFEUJ27adXuoP3Y7jWIqiBGzbzjMzIaJg5nKxWCz4/f4IM8+OjY2dhxUalPvVAVuW5WkAiOi6npFlOYeIZi6XO0tEw47jKAAwpyjKbSKadrvd816vt6VQKAwj4pimaWlVVScB4PYSOG5ocdi9e7dy57y7u1vu6upqWk+RWe/63VHxfc7wVv0SCP83+xtE4TMNmVlpAwAAAABJRU5ErkJggg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:ital,wght@0,300;0,400;0,600;0,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <img src="data:image/png;base64,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" alt="Logo" style="height:36px;width:auto;vertical-align:middle;margin-right:.5rem">
+    ART<span>[&]</span>FACT
+  </a>
+  <ul class="nav-links">
+    <li><a href="#compagnie">Compagnie</a></li>
+    <li><a href="#spectacles">Spectacles</a></li>
+    <li><a href="#dates">Dates</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-soc">
+    <a href="https://www.facebook.com/artetfactcie/" target="_blank" title="Facebook">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    </a>
+    <a href="#" title="Instagram">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">🎭 Magie · Rires · Émerveillement ✨</div>
+      <h1 class="hero-title">ART<span class="amp">[&]</span>FACT</h1>
+      <div class="hero-sub">✨ Compagnie de Théâtre ✨</div>
+      <div class="hero-loc">📍 Allauch · Marseille · Région PACA</div>
+      <p class="hero-desc">🎪 Marionnettes, magie, vidéoprojection et musiques enchanteresses… Des spectacles féeriques pour transporter petits et grands dans un monde extraordinaire ! 🌈</p>
+      <div class="hero-ctas">
+        <a href="#spectacles" class="btn-main">🎠 Nos spectacles magiques !</a>
+        <a href="#contact" class="btn-ghost">🎟 Nous programmer</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <a href="#fantaisies" class="hposter"><video src="videos/animes/fantaisies.mp4" autoplay loop muted playsinline poster="images/poster-fantaisies.jpg"></video><span class="hposter-tip">Fantaisies &amp; Sorcelleries</span></a>
+      <a href="#petitchap" class="hposter"><video src="videos/animes/petitchap.mp4" autoplay loop muted playsinline poster="images/poster-petitchap.jpg"></video><span class="hposter-tip">Le Petit Chap'</span></a>
+      <a href="#raiponce" class="hposter"><video src="videos/animes/raiponce.mp4" autoplay loop muted playsinline poster="images/poster-raiponce.jpg"></video><span class="hposter-tip">Raiponce</span></a>
+      <a href="#noel" class="hposter"><video src="videos/animes/noel.mp4" autoplay loop muted playsinline poster="images/poster-noel.jpg"></video><span class="hposter-tip">Noël de M. Silver</span></a>
+      <a href="#reves" class="hposter"><video src="videos/animes/bois-dormant.mp4" autoplay loop muted playsinline poster="images/poster-reves-bois.jpg"></video><span class="hnew">NEW</span><span class="hposter-tip">Les Rêves du Bois Dormant</span></a>
+      <a href="#peterpan" class="hposter"><video src="videos/animes/peter-pan.mp4" autoplay loop muted playsinline poster="images/poster-peter-pan.jpg"></video><span class="hnew">NEW</span><span class="hposter-tip">Peter Pan</span></a>
+    </div>
+  </div>
+  <div class="hero-fog"></div>
+</section>
+
+<div class="wave" style="background:var(--sky)"><svg viewBox="0 0 1440 55" preserveAspectRatio="none"><path d="M0,55 C360,10 1080,10 1440,55 L1440,55 L0,55Z" fill="var(--sky)"/></svg></div>
+
+<!-- PRÉSENTATION -->
+<section class="presentation" id="compagnie">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sh"><div class="sk">À propos</div><h2 class="st">🎭 Qui sommes-<em>nous</em> ? 🎭</h2><div class="sl"></div></div>
+    <div class="pres-wrap">
+      <div class="pres-text">
+        <p>La Compagnie Art[&]Fact a été créée en août 2019, d'une volonté et sur une énergie commune des trois fondateurs <strong>Manon Prophette, Aurélie Dupré et Anthony Ravion</strong>.</p>
+        <p>La Compagnie est née suite à la création du spectacle jeune public <em>« Fantaisies et Sorcelleries »</em> et du souhait d'apporter au paysage théâtral local et national des spectacles dotés d'une profondeur narrative et d'un réel travail esthétique.</p>
+        <p>Théâtre, théâtre d'ombre, marionnette, vidéoprojection, ambiance sonore et musicale sur mesure… C'est à travers toutes ces pratiques complémentaires que la cie Art[&]Fact raconte ses histoires avec comme objectif principal celui de transporter petits et grands dans un monde plus beau.</p>
+        <p>Nous aimons privilégier le travail de création pur : la grande majorité des éléments que vous verrez dans nos spectacles auront été pensés et créés par nos soins. Nous vous invitons à plonger avec nous au cœur de notre univers ❤️</p>
+        <div class="pres-sign">La compagnie Art[&]Fact<small>📍 Basée près de Marseille, dans la ville d'Allauch</small></div>
+      </div>
+      <div class="team-card">
+        <div class="tc-title">🎭 L'équipe artistique</div>
+        <div class="tlist">
+          <div class="ti"><div class="av av1">AR</div><div><div class="mn">Anthony Ravion</div><div class="mr">Auteur · Metteur en scène · Comédien</div></div></div>
+          <div class="ti"><div class="av av2">MP</div><div><div class="mn">Manon Prophette</div><div class="mr">Auteure · Metteuse en scène · Comédienne</div></div></div>
+          <div class="ti"><div class="av av3">AD</div><div><div class="mn">Aurélie Dupré</div><div class="mr">Auteure · Comédienne</div></div></div>
+          <div class="ti"><div class="av av4">CL</div><div><div class="mn">Cynthia Labeye</div><div class="mr">Auteure · Metteuse en scène · Comédienne</div></div></div>
+          <div class="ti"><div class="av av5">JB</div><div><div class="mn">Julien Bouhitem</div><div class="mr">Comédien</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave" style="background:var(--sky)"><svg viewBox="0 0 1440 55" preserveAspectRatio="none"><path d="M0,0 C480,55 960,55 1440,0 L1440,55 L0,55Z" fill="white"/></svg></div>
+
+<!-- SPECTACLES -->
+<section class="spectacles" id="spectacles">
+  <div class="shows-wrap">
+    <div class="sh"><div class="sk">Répertoire</div><h2 class="st">🌟 Nos spectacles <em>magiques</em> 🌟</h2><div class="sl"></div></div>
+    <div class="shows-grid">
+
+      <div class="sc" id="fantaisies">
+        <div class="sp"><video src="videos/animes/fantaisies.mp4" autoplay loop muted playsinline poster="images/poster-fantaisies.jpg"></video><div class="ab">À partir de 5 ans</div></div>
+        <div class="sb">
+          <div class="sn">Fantaisies et Sorcelleries</div>
+          <p class="sy">La princesse Ursula s'éveille seule dans son château. Un matin, le royaume sombre dans les ténèbres et la princesse disparaît. Aventures, fantaisies et sorcelleries rythmeront l'histoire du château.</p>
+          <div class="chips"><span class="chip cd">50 min</span><span class="chip cp">Tout public</span></div>
+          <div class="sa">Écrit et mis en scène par Anthony Ravion<br>Interprètes : M. Prophette, A. Dupré, A. Ravion</div>
+        </div>
+        <div class="sc-footer">
+          <div class="media-btns">
+            <button class="media-btn mb-video" onclick="openModal('fantaisies','video')">▶ Teaser</button>
+            <button class="media-btn mb-photos" onclick="openModal('fantaisies','photos')">📷 Photos</button>
+          </div>
+          <a href="https://www.billetreduc.com/search.htm?se=fantaisies-sorcelleries&region=U" target="_blank" class="sbtn sbtn-br">🎟 Réserver sur Billet Réduc</a>
+        </div>
+      </div>
+
+      <div class="sc" id="petitchap">
+        <div class="sp"><video src="videos/animes/petitchap.mp4" autoplay loop muted playsinline poster="images/poster-petitchap.jpg"></video><div class="ab">À partir de 3 ans</div></div>
+        <div class="sb">
+          <div class="sn">Le Petit Chap'</div>
+          <p class="sy">Le Petit Chaperon Rouge ne reconnaît plus sa forêt. Les fleurs ont disparu, les animaux partis, le Printemps n'est pas arrivé. Un spectacle de surprises, musiques et tendresse.</p>
+          <div class="chips"><span class="chip cd">45 min</span><span class="chip cp">Jeune public</span></div>
+          <div class="sa">Adaptation d'A. Dupré et M. Prophette<br>Mise en scène : Manon Prophette</div>
+        </div>
+        <div class="sc-footer">
+          <div class="media-btns">
+            <button class="media-btn mb-video" onclick="openModal('petitchap','video')">▶ Teaser</button>
+            <button class="media-btn mb-photos" onclick="openModal('petitchap','photos')">📷 Photos</button>
+          </div>
+          <a href="https://www.billetreduc.com/search.htm?se=le-petit-chap&region=U" target="_blank" class="sbtn sbtn-br">🎟 Réserver sur Billet Réduc</a>
+        </div>
+      </div>
+
+      <div class="sc" id="raiponce">
+        <div class="sp"><video src="videos/animes/raiponce.mp4" autoplay loop muted playsinline poster="images/poster-raiponce.jpg"></video><div class="ab">À partir de 1 an</div></div>
+        <div class="sb">
+          <div class="sn">Raiponce</div>
+          <p class="sy">Le célèbre conte des frères Grimm revisité. Raiponce vit isolée dans une tour. Participez à son histoire ! Mais Mère Gothel et ses sortilèges ne sont jamais très loin…</p>
+          <div class="chips"><span class="chip cd">V1 : 30 min · dès 1 an</span><span class="chip cp">V2 : 45 min · dès 3 ans</span></div>
+          <div class="sa">Auteurs : Cynthia Labeye et Anthony Ravion</div>
+        </div>
+        <div class="sc-footer">
+          <div class="media-btns">
+            <button class="media-btn mb-video" onclick="openModal('raiponce','video')">▶ Teaser</button>
+            <button class="media-btn mb-photos" onclick="openModal('raiponce','photos')">📷 Photos</button>
+          </div>
+          <a href="https://www.billetreduc.com/search.htm?se=raiponce&region=U" target="_blank" class="sbtn sbtn-br">🎟 Réserver sur Billet Réduc</a>
+        </div>
+      </div>
+
+      <div class="sc" id="noel">
+        <div class="sp"><video src="videos/animes/noel.mp4" autoplay loop muted playsinline poster="images/poster-noel.jpg"></video><div class="ab">À partir de 3 ans</div></div>
+        <div class="sb">
+          <div class="sn">Le Merveilleux Noël de M. Silver</div>
+          <p class="sy">Monsieur Silver vit seul, isolé. La veille de Noël, Jessie, 8 ans, frappe à sa porte. Un spectacle drôle, décalé et touchant pour redécouvrir la magie de Noël.</p>
+          <div class="chips"><span class="chip cd">50 min</span><span class="chip cp">Tout public</span></div>
+          <div class="sa">Auteur : Anthony Ravion<br>Interprètes : A. Ravion, J. Bouhitem, C. Labeye, A. Dupré</div>
+        </div>
+        <div class="sc-footer">
+          <div class="media-btns">
+            <button class="media-btn mb-video" onclick="openModal('noel','video')">▶ Teaser</button>
+            <button class="media-btn mb-photos" onclick="openModal('noel','photos')">📷 Photos</button>
+          </div>
+          <a href="https://www.billetreduc.com/search.htm?se=merveilleux+noel+monsieur+silver&type=3" target="_blank" class="sbtn sbtn-br">🎟 Réserver sur Billet Réduc</a>
+        </div>
+      </div>
+
+      <div class="sc" id="reves">
+        <div class="nb">NEW</div>
+        <div class="sp"><video src="videos/animes/bois-dormant.mp4" autoplay loop muted playsinline poster="images/poster-reves-bois.jpg"></video><div class="ab">À partir de 1 an</div></div>
+        <div class="sb">
+          <div class="sn">Les Rêves du Bois Dormant</div>
+          <p class="sy">Plongez au cœur des rêves de la Belle au Bois Dormant. Aurore découvre le rire, la confiance et l'amour grâce aux amis du monde des rêves. Marionnettes, musiques et poésie.</p>
+          <div class="chips"><span class="chip cd">30 min</span><span class="chip cn">Nouveau !</span></div>
+          <div class="sa">Auteur : Marion Prophette · Mise en scène : Anthony Ravion<br>Interprète : Aurélie Dupré</div>
+        </div>
+        <div class="sc-footer">
+          <div class="media-btns">
+            <button class="media-btn mb-video" onclick="openModal('reves','video')">▶ Teaser</button>
+            <button class="media-btn mb-photos" onclick="openModal('reves','photos')">📷 Photos</button>
+          </div>
+          <a href="https://www.billetreduc.com/search.htm?se=les+reves+du+bois+dormant" target="_blank" class="sbtn sbtn-br">🎟 Réserver sur Billet Réduc</a>
+        </div>
+      </div>
+
+      <div class="sc" id="peterpan">
+        <div class="nb">NEW</div>
+        <div class="sp"><video src="videos/animes/peter-pan.mp4" autoplay loop muted playsinline poster="images/poster-peter-pan.jpg"></video><div class="ab">À partir de 3 ans</div></div>
+        <div class="sb">
+          <div class="sn">Peter Pan</div>
+          <p class="sy">Envolez-vous avec Peter Pan et Wendy : Clochette, les Enfants Perdus et le Capitaine Crochet ! Marionnettes, vidéoprojection et musiques dans une atmosphère MAGIQUE.</p>
+          <div class="chips"><span class="chip cd">50 min</span><span class="chip cn">Nouveau !</span></div>
+          <div class="sa">Auteurs : Cynthia Labeye et Anthony Ravion<br>Interprètes : Anthony Ravion et Cynthia Labeye</div>
+        </div>
+        <div class="sc-footer">
+          <div class="media-btns">
+            <button class="media-btn mb-video" onclick="openModal('peterpan','video')">▶ Teaser</button>
+            <button class="media-btn mb-photos" onclick="openModal('peterpan','photos')">📷 Photos</button>
+          </div>
+          <a href="https://www.billetreduc.com/search.htm?se=peter+pan&type=3&region=U" target="_blank" class="sbtn sbtn-br">🎟 Réserver sur Billet Réduc</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODAL MEDIA -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-title">Titre</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tab-video" onclick="switchTab('video')">▶ Teaser / Vidéo</button>
+      <button class="modal-tab" id="tab-photos" onclick="switchTab('photos')">📷 Photos de scène</button>
+    </div>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<div class="wave" style="background:white"><svg viewBox="0 0 1440 55" preserveAspectRatio="none"><path d="M0,55 C480,0 960,0 1440,55 L1440,55 L0,55Z" fill="var(--sky)"/></svg></div>
+
+<!-- AVIS -->
+<section class="reviews" id="avis">
+  <div class="reviews-wrap">
+    <div class="sh"><div class="sk">Ce que disent les spectateurs</div><h2 class="st">💬 Ce que disent les <em>familles</em> 💬</h2><div class="sl"></div></div>
+    <div class="rs-bar">
+      <span class="rs-logo">Billet Réduc</span>
+      <span class="rs-stars">★★★★★</span>
+      <span class="rs-info">Avis vérifiés par les spectateurs</span>
+    </div>
+    <div class="carousel-outer">
+      <div class="carousel-track auto-scroll" id="carousel-track">
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Un spectacle féerique et bien mené ! Les enfants étaient captivés du début à la fin. Les décors et costumes sont vraiment soignés.</p><div><div class="rc-author">Marie-Laure G.</div><div class="rc-show">Fantaisies et Sorcelleries</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Ma fille de 3 ans a adoré ! Le Petit Chap' est plein de douceur et de malice. Les comédiens sont excellents, la musique entraînante.</p><div><div class="rc-author">Sophie T.</div><div class="rc-show">Le Petit Chap'</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Raiponce revisitée avec beaucoup d'humour. Les tout-petits comme les grands ont passé un excellent moment. La participation du public est vraiment bien intégrée.</p><div><div class="rc-author">Julien M.</div><div class="rc-show">Raiponce</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Peter Pan est absolument magique ! Les marionnettes sont superbes, la vidéoprojection époustouflante. Mon fils de 4 ans voulait y retourner dès la sortie !</p><div><div class="rc-author">Camille R.</div><div class="rc-show">Peter Pan</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Le Merveilleux Noël de M. Silver nous a tous touchés. L'histoire est belle, les comédiens drôles et talentueux. Une belle façon de retrouver la magie de Noël !</p><div><div class="rc-author">Isabelle D.</div><div class="rc-show">Noël de M. Silver</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Un spectacle tout en poésie, parfait pour les petits. Les marionnettes sont magnifiques et l'interprète époustouflante. On en est ressorti émerveillés.</p><div><div class="rc-author">Nathalie B.</div><div class="rc-show">Les Rêves du Bois Dormant</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Peter Pan fait sourire petits et grands. Un moment de convivialité où le Peter Pan de notre enfance se pare de références actuelles. Les acteurs sont supers !</p><div><div class="rc-author">David V.</div><div class="rc-show">Peter Pan · jan. 2026</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Je ne pensais pas autant rigoler ! Des péripéties qui rendent le spectacle encore plus drôle. De super interactions avec les enfants.</p><div><div class="rc-author">Spectateur anonyme</div><div class="rc-show">Peter Pan · fév. 2026</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★☆</div><p class="rc-text">Compagnie au top ! On a vu plusieurs spectacles et chaque fois c'est une belle surprise. Une créativité débordante et un vrai soin aux détails.</p><div><div class="rc-author">Laurent V.</div><div class="rc-show">Compagnie Art[&]Fact</div></div></div>
+        <!-- Duplicate for loop -->
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Un spectacle féerique et bien mené ! Les enfants étaient captivés du début à la fin. Les décors et costumes sont vraiment soignés.</p><div><div class="rc-author">Marie-Laure G.</div><div class="rc-show">Fantaisies et Sorcelleries</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Ma fille de 3 ans a adoré ! Le Petit Chap' est plein de douceur et de malice. Les comédiens sont excellents, la musique entraînante.</p><div><div class="rc-author">Sophie T.</div><div class="rc-show">Le Petit Chap'</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Raiponce revisitée avec beaucoup d'humour. Les tout-petits comme les grands ont passé un excellent moment.</p><div><div class="rc-author">Julien M.</div><div class="rc-show">Raiponce</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Peter Pan est absolument magique ! Les marionnettes sont superbes, la vidéoprojection époustouflante.</p><div><div class="rc-author">Camille R.</div><div class="rc-show">Peter Pan</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Le Merveilleux Noël de M. Silver nous a tous touchés. Une belle façon de retrouver la magie de Noël !</p><div><div class="rc-author">Isabelle D.</div><div class="rc-show">Noël de M. Silver</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Un spectacle tout en poésie, parfait pour les petits. Les marionnettes sont magnifiques et l'interprète époustouflante.</p><div><div class="rc-author">Nathalie B.</div><div class="rc-show">Les Rêves du Bois Dormant</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Peter Pan fait sourire petits et grands. Un moment de convivialité où le Peter Pan de notre enfance se pare de références actuelles.</p><div><div class="rc-author">David V.</div><div class="rc-show">Peter Pan</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★★</div><p class="rc-text">Je ne pensais pas autant rigoler ! Des péripéties qui rendent le spectacle encore plus drôle.</p><div><div class="rc-author">Spectateur anonyme</div><div class="rc-show">Peter Pan</div></div></div>
+        <div class="rc"><div class="rc-stars">★★★★☆</div><p class="rc-text">Compagnie au top ! Une créativité débordante et un vrai soin aux détails. Bravo à toute l'équipe !</p><div><div class="rc-author">Laurent V.</div><div class="rc-show">Compagnie Art[&]Fact</div></div></div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="cnav" onclick="carouselMove(-1)">&#8249;</button>
+      <button class="cnav" onclick="carouselMove(1)">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<div class="wave" style="background:var(--sky)"><svg viewBox="0 0 1440 55" preserveAspectRatio="none"><path d="M0,0 C360,55 1080,55 1440,0 L1440,55 L0,55Z" fill="#0d2340"/></svg></div>
+
+<!-- DATES -->
+<section class="dates-sec" id="dates">
+  <div class="dates-wrap">
+    <div class="sh"><div class="sk">Agenda</div><h2 class="st">📅 Prochaines <em style="color:var(--gold)">représentations</em> 🎪</h2><div class="sl"></div></div>
+    <div class="dlist">
+
+      <div class="drow">
+        <div class="dthumb"><video src="videos/animes/raiponce.mp4" autoplay loop muted playsinline poster="images/poster-raiponce.jpg"></video></div>
+        <div><div class="dsn">Raiponce</div><div class="dsi">Dès 1 an / 3 ans · 30-45 min</div></div>
+        <div class="dpills">
+          <div class="dp"><div class="dpd">25 fév – 28 fév 2026</div><div class="dpp">La Comédie de Marseille</div></div>
+          <div class="dp"><div class="dpd">1er &amp; 2 avril 2026</div><div class="dpp">Le Flibustier · Aix-en-Provence</div></div>
+          <div class="dp"><div class="dpd">21 – 23 avril 2026</div><div class="dpp">La Comédie de Nîmes</div></div>
+          <div class="dp"><div class="dpd">17 – 26 oct 2026</div><div class="dpp">Défonce de Rire · Clermont-Ferrand</div></div>
+          <div class="dp"><div class="dpd">20 – 26 fév 2027</div><div class="dpp">La Marelle des Teinturiers · Avignon</div></div>
+        </div>
+      </div>
+
+      <div class="drow">
+        <div class="dthumb"><video src="videos/animes/bois-dormant.mp4" autoplay loop muted playsinline poster="images/poster-reves-bois.jpg"></video></div>
+        <div><div class="dsn">Les Rêves du Bois Dormant</div><div class="dsi">Dès 1 an · 30 min</div></div>
+        <div class="dpills">
+          <div class="dp"><div class="dpd">18 – 22 fév 2026</div><div class="dpp">La Comédie de Marseille</div></div>
+          <div class="dp"><div class="dpd">6 – 11 avril 2026</div><div class="dpp">Le Quai des Artistes · Montbrison</div></div>
+        </div>
+      </div>
+
+      <div class="drow">
+        <div class="dthumb"><video src="videos/animes/peter-pan.mp4" autoplay loop muted playsinline poster="images/poster-peter-pan.jpg"></video></div>
+        <div><div class="dsn">Peter Pan</div><div class="dsi">Dès 3 ans · 50 min</div></div>
+        <div class="dpills">
+          <div class="dp"><div class="dpd">10 janv 2026</div><div class="dpp">L'Archange Théâtre</div></div>
+          <div class="dp"><div class="dpd">18, 21, 22, 25, 28 fév &amp; 1er mars</div><div class="dpp">La Fontaine d'Argent · Aix-en-Provence</div></div>
+          <div class="dp"><div class="dpd">1er &amp; 2 avril 2026</div><div class="dpp">Le Flibustier · Aix-en-Provence</div></div>
+          <div class="dp"><div class="dpd">21 – 23 avril 2026</div><div class="dpp">La Comédie de Nîmes</div></div>
+          <div class="dp"><div class="dpd">9, 16, 23 &amp; 30 mai</div><div class="dpp">La Comédie des Sud Cabriès</div></div>
+          <div class="dp"><div class="dpd">20 – 26 fév 2027</div><div class="dpp">La Marelle des Teinturiers · Avignon</div></div>
+        </div>
+      </div>
+
+      <div class="drow">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div class="dthumb" style="width:110px;height:44px;border-radius:4px"><video src="videos/animes/fantaisies.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover"></video></div>
+          <div class="dthumb" style="width:110px;height:44px;border-radius:4px"><video src="videos/animes/petitchap.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover"></video></div>
+          <div class="dthumb" style="width:110px;height:44px;border-radius:4px"><video src="videos/animes/noel.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover"></video></div>
+        </div>
+        <div>
+          <div class="dsn">Fantaisies &amp; Sorcelleries</div>
+          <div class="dsn">Le Petit Chap'</div>
+          <div class="dsn" style="white-space:nowrap">Le Merveilleux Noël de M. Silver</div>
+          <div class="dsi" style="margin-top:.6rem">Dates à venir</div>
+        </div>
+        <div class="dav">Nouvelles dates prochainement — contactez-nous pour programmer</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="wave" style="background:#0d2340"><svg viewBox="0 0 1440 55" preserveAspectRatio="none"><path d="M0,55 C480,0 960,0 1440,55 L1440,55 L0,55Z" fill="#1a3a5c"/></svg></div>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div class="newsletter-wrap">
+    <div class="sk">Restez informés</div>
+    <h2 class="st">📬 Restez dans la <em>magie</em> ! 📬</h2>
+    <div class="sl"></div>
+    <p class="newsletter-desc">🌟 Soyez les premiers à découvrir nos nouvelles aventures, nos prochaines dates et les coulisses de nos créations magiques !</p>
+    <form class="nl-form" onsubmit="nlSubmit(event)">
+      <input class="nl-input" type="email" id="nl-email" placeholder="Votre adresse email" required>
+      <button class="nl-btn" type="submit">S'inscrire</button>
+    </form>
+    <div class="nl-success" id="nl-success">✓ Merci ! Vous êtes bien inscrit(e) à notre newsletter.</div>
+    <p class="nl-note">Pas de spam. Désabonnement possible à tout moment.</p>
+  </div>
+</section>
+
+<div class="wave" style="background:#1a3a5c"><svg viewBox="0 0 1440 55" preserveAspectRatio="none"><path d="M0,0 C480,55 960,55 1440,0 L1440,55 L0,55Z" fill="#f5a020"/></svg></div>
+
+<!-- CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="contact-inner">
+    <div class="sk">Nous contacter</div>
+    <h2 class="st">🎟 Venez nous <em>rejoindre</em> ! 🎟</h2>
+    <div class="sl"></div>
+    <div class="cbox">
+      <p class="ci-intro">Vous souhaitez acheter ou programmer l'un de nos spectacles ? Contactez-nous !</p>
+      <div class="citems">
+        <div class="citem"><div class="cico">✉️</div><div><div class="clabel">Email</div><div class="cval"><a href="mailto:Cieartefact@gmail.com">Cieartefact@gmail.com</a></div></div></div>
+        <div class="citem"><div class="cico">📱</div><div><div class="clabel">Téléphone</div><div class="cval"><a href="tel:0752615757">07 52 61 57 57</a></div><div class="cval"><a href="tel:0669090254">06 69 09 02 54</a></div></div></div>
+      </div>
+      <hr class="cdiv">
+      <p class="cfbnote">Ou bien par message privé sur Facebook :</p>
+      <a href="https://www.facebook.com/artetfactcie/" class="fb-btn" target="_blank">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        Nous contacter sur Facebook
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">ART<span>[&]</span>FACT</div>
+  <div class="fc">© 2019–2026 Art[&]Fact · Compagnie de théâtre · Tous droits réservés</div>
+  <div class="floc">Allauch · Marseille · Région PACA</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
