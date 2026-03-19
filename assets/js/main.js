@@ -110,6 +110,29 @@ document.addEventListener('DOMContentLoaded', function() {
   if (btnPrev)  btnPrev.addEventListener('click',  function() { lbGo(-1); });
   if (btnNext)  btnNext.addEventListener('click',  function() { lbGo(1); });
 
+  /* Bouton plein écran */
+  var btnFs = lbGetEl('lbFullscreen');
+  function toggleFullscreen() {
+    if (!lb) return;
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      var req = lb.requestFullscreen || lb.webkitRequestFullscreen;
+      if (req) req.call(lb);
+      if (btnFs) btnFs.classList.add('is-fullscreen');
+    } else {
+      var ex = document.exitFullscreen || document.webkitExitFullscreen;
+      if (ex) ex.call(document);
+      if (btnFs) btnFs.classList.remove('is-fullscreen');
+    }
+  }
+  if (btnFs) btnFs.addEventListener('click', toggleFullscreen);
+  /* Sync état bouton si l'utilisateur quitte le FS autrement (Escape) */
+  document.addEventListener('fullscreenchange', function() {
+    if (btnFs) btnFs.classList.toggle('is-fullscreen', !!document.fullscreenElement);
+  });
+  document.addEventListener('webkitfullscreenchange', function() {
+    if (btnFs) btnFs.classList.toggle('is-fullscreen', !!document.webkitFullscreenElement);
+  });
+
   if (lb) {
     lb.addEventListener('click', function(e) {
       if (e.target === lb) lbClose();

@@ -496,10 +496,28 @@ section { position: relative; z-index: 1; }
   margin-top: .4rem; font-style: italic;
 }
 
+/* ── BOUTON PLEIN ÉCRAN (style Airbnb) ── */
+.lb-fullscreen {
+  position: absolute; top: 1rem; left: 1rem;
+  display: flex; align-items: center; gap: .5rem;
+  background: rgba(255,255,255,.92); color: #222;
+  border: none; border-radius: 50px;
+  padding: .5rem 1rem .5rem .7rem;
+  font-family: var(--fb); font-size: .8rem; font-weight: 700;
+  cursor: pointer; z-index: 3;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  transition: background .2s, transform .2s;
+}
+.lb-fullscreen:hover { background: white; transform: scale(1.04); }
+.lb-fullscreen svg { flex-shrink: 0; }
+/* Quand on est en fullscreen, changer l'icône */
+.lb-fullscreen.is-fullscreen span { display: none; }
+.lb-fullscreen.is-fullscreen::after { content: 'Quitter'; font-family: var(--fb); font-size: .8rem; font-weight: 700; }
+
 /* ── LIGHTBOX PAYSAGE : image plein écran ── */
 @media (orientation: landscape) and (max-height: 500px) {
   #lightbox {
-    padding: .4rem 3.5rem; /* laisser place aux flèches */
+    padding: .4rem 3.5rem;
     flex-direction: row;
   }
   .lb-img-wrap {
@@ -516,6 +534,7 @@ section { position: relative; z-index: 1; }
   .lb-nav { width: 40px; height: 40px; font-size: 1.3rem; }
   .lb-prev { left: .4rem; }
   .lb-next { right: .4rem; }
+  .lb-fullscreen { top: .5rem; left: .5rem; padding: .35rem .8rem .35rem .5rem; font-size: .72rem; }
 }
 
 /* Pied de carte spectacle */
