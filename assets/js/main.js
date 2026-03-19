@@ -56,7 +56,6 @@ var PHOTOS = {
 var lbShow = '';
 var lbIdx  = 0;
 
-/* ── LIGHTBOX ── */
 function lbGetEl(id) { return document.getElementById(id); }
 
 function lbRender() {
@@ -78,93 +77,81 @@ function lbGo(dir) {
   lbRender();
 }
 
-function lbClose() {
-  var lb = lbGetEl('lightbox');
-  if (lb) lb.hidden = true;
-  document.body.style.overflow = '';
-}
-
-window.openLightbox = function(show, idx) {
-  var photos = PHOTOS[show];
+/* ── openLightbox (solution Gemini) ── */
+window.openLightbox = function(slug, idx) {
+  var photos = PHOTOS[slug];
   if (!photos) return;
-  var lb  = lbGetEl('lightbox');
-  var btn = lbGetEl('lbClose');
-  if (!lb) return;
-  lbShow = show;
+  lbShow = slug;
   lbIdx  = idx || 0;
   lbRender();
-  lb.hidden = false;
-  document.body.style.overflow = 'hidden';
+  var lb  = lbGetEl('lightbox');
+  var btn = lbGetEl('lbClose');
+  if (lb) {
+    lb.hidden = false;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    /* Passage automatique en plein écran si mode paysage sur mobile */
+    if (window.innerWidth > window.innerHeight && document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(function(err) {
+        console.log('Plein écran refusé ou non supporté');
+      });
+    }
+  }
   if (btn) btn.focus();
 };
+
+/* ── closeLightbox (solution Gemini) ── */
+function lbClose() {
+  var lb = lbGetEl('lightbox');
+  if (lb) {
+    lb.hidden = true;
+    lb.classList.remove('active');
+  }
+  document.body.style.overflow = '';
+  /* Quitter le plein écran à la fermeture */
+  if (document.fullscreenElement && document.exitFullscreen) {
+    document.exitFullscreen();
+  }
+}
 
 document.addEventListener('DOMContentLoaded', function() {
 
   /* ── LIGHTBOX : boutons et raccourcis ── */
-  var lb    = lbGetEl('lightbox');
+  var lb       = lbGetEl('lightbox');
   var btnClose = lbGetEl('lbClose');
   var btnPrev  = lbGetEl('lbPrev');
   var btnNext  = lbGetEl('lbNext');
+  var btnFs    = lbGetEl('lbFullscreen');
 
   if (btnClose) btnClose.addEventListener('click', lbClose);
   if (btnPrev)  btnPrev.addEventListener('click',  function() { lbGo(-1); });
   if (btnNext)  btnNext.addEventListener('click',  function() { lbGo(1); });
 
-  /* Bouton plein écran */
-  var btnFs = lbGetEl('lbFullscreen');
-
-  function enterFullscreen() {
-    if (!lb) return;
-    /* Tentative API Fullscreen (desktop + Android Chrome) */
-    var req = lb.requestFullscreen || lb.webkitRequestFullscreen || lb.mozRequestFullScreen;
-    if (req) {
-      req.call(lb).catch(function() {});
-      /* Tenter aussi le verrouillage de l'orientation en paysage */
-      if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape').catch(function() {});
-      }
-      if (btnFs) { btnFs.querySelector('span').textContent = 'Quitter'; btnFs.classList.add('is-fullscreen'); }
-    } else {
-      /* Fallback iOS : forcer le CSS paysage plein écran */
-      lb.classList.add('force-landscape');
-      if (btnFs) { btnFs.querySelector('span').textContent = 'Quitter'; btnFs.classList.add('is-fullscreen'); }
-    }
-  }
-
-  function exitFullscreen() {
-    var ex = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
-    if (ex && (document.fullscreenElement || document.webkitFullscreenElement)) {
-      ex.call(document).catch(function() {});
-    }
-    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
-    if (lb) lb.classList.remove('force-landscape');
-    if (btnFs) { btnFs.querySelector('span').textContent = 'Plein écran'; btnFs.classList.remove('is-fullscreen'); }
-  }
-
+  /* Bouton plein écran manuel (desktop) */
   if (btnFs) {
     btnFs.addEventListener('click', function() {
-      if (btnFs.classList.contains('is-fullscreen')) exitFullscreen();
-      else enterFullscreen();
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(function() {});
+      }
+    });
+    ['fullscreenchange','webkitfullscreenchange'].forEach(function(ev) {
+      document.addEventListener(ev, function() {
+        var isFs = !!document.fullscreenElement;
+        var span = btnFs.querySelector('span');
+        if (span) span.textContent = isFs ? 'Quitter' : 'Plein écran';
+        btnFs.classList.toggle('is-fullscreen', isFs);
+      });
     });
   }
 
-  /* Sync si l'utilisateur quitte le FS via Escape */
-  ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange'].forEach(function(ev) {
-    document.addEventListener(ev, function() {
-      var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-      if (!isFs) {
-        if (lb) lb.classList.remove('force-landscape');
-        if (btnFs) { btnFs.querySelector('span').textContent = 'Plein écran'; btnFs.classList.remove('is-fullscreen'); }
-      }
-    });
-  });
-
+  /* Clavier et fond */
   if (lb) {
     lb.addEventListener('click', function(e) {
       if (e.target === lb) lbClose();
     });
   }
-
   document.addEventListener('keydown', function(e) {
     var lb2 = lbGetEl('lightbox');
     if (!lb2 || lb2.hidden) return;
@@ -271,10 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hint.classList.toggle('is-paused', val);
       }
     }
-    /* Clic souris = toggle pause */
     track.addEventListener('click', function() { setPaused(!isPaused); });
-
-    /* Swipe mobile : glisser le doigt fait défiler les avis */
     if (outer) {
       var swipeStartX = 0, swipeStartT = 0, swipeOffset = 0;
       var cardW = 295 + 12;
@@ -291,7 +275,6 @@ document.addEventListener('DOMContentLoaded', function() {
       outer.addEventListener('touchend', function(e) {
         var dx = e.changedTouches[0].clientX - swipeStartX;
         var dt = Date.now() - swipeStartT;
-        /* Tap court sans déplacement = toggle pause */
         if (Math.abs(dx) < 10 && dt < 250) {
           track.style.transform = 'translateX(' + swipeOffset + 'px)';
           return;
