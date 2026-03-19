@@ -36,7 +36,7 @@ var PHOTOS = {
   ],
   'bois-dormant': [
     ['assets/img/photos/bois-dormant/bois-dormant-01.png', 'Les Reves du Bois Dormant — photo 1'],
-    ['assets/img/photos/bois-dormant/bois-dormant-02.png', 'Les Reves du Bois Dormant — photo 2'],
+    ['assets/img/photos/bois-dormant/bois-dormant-02.png', 'Les Reves du Bois Dormant — photo 3'],
     ['assets/img/photos/bois-dormant/bois-dormant-03.png', 'Les Reves du Bois Dormant — photo 3'],
     ['assets/img/photos/bois-dormant/bois-dormant-04.png', 'Les Reves du Bois Dormant — photo 4'],
     ['assets/img/photos/bois-dormant/bois-dormant-05.png', 'Les Reves du Bois Dormant — photo 5'],
@@ -56,6 +56,7 @@ var PHOTOS = {
 var lbShow = '';
 var lbIdx  = 0;
 
+/* ── LIGHTBOX ── */
 function lbGetEl(id) { return document.getElementById(id); }
 
 function lbRender() {
@@ -77,81 +78,107 @@ function lbGo(dir) {
   lbRender();
 }
 
-/* ── openLightbox (solution Gemini) ── */
-window.openLightbox = function(slug, idx) {
-  var photos = PHOTOS[slug];
-  if (!photos) return;
-  lbShow = slug;
-  lbIdx  = idx || 0;
-  lbRender();
-  var lb  = lbGetEl('lightbox');
-  var btn = lbGetEl('lbClose');
-  if (lb) {
-    lb.hidden = false;
-    lb.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    /* Passage automatique en plein écran si mode paysage sur mobile */
-    if (window.innerWidth > window.innerHeight && document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen().catch(function(err) {
-        console.log('Plein écran refusé ou non supporté');
-      });
-    }
-  }
-  if (btn) btn.focus();
-};
-
-/* ── closeLightbox (solution Gemini) ── */
 function lbClose() {
   var lb = lbGetEl('lightbox');
-  if (lb) {
-    lb.hidden = true;
-    lb.classList.remove('active');
-  }
+  if (lb) lb.hidden = true;
   document.body.style.overflow = '';
-  /* Quitter le plein écran à la fermeture */
-  if (document.fullscreenElement && document.exitFullscreen) {
-    document.exitFullscreen();
+  
+  /* Quitter le mode plein écran à la fermeture si actif */
+  var ex = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
+  if (ex && (document.fullscreenElement || document.webkitFullscreenElement)) {
+    ex.call(document).catch(function() {});
   }
 }
+
+window.openLightbox = function(show, idx) {
+  var photos = PHOTOS[show];
+  if (!photos) return;
+  var lb  = lbGetEl('lightbox');
+  var btn = lbGetEl('lbClose');
+  if (!lb) return;
+  lbShow = show;
+  lbIdx  = idx || 0;
+  lbRender();
+  lb.hidden = false;
+  document.body.style.overflow = 'hidden';
+  if (btn) btn.focus();
+
+  /* Passage automatique en plein écran si l'appareil est en mode paysage */
+  if (window.innerWidth > window.innerHeight) {
+    var req = lb.requestFullscreen || lb.webkitRequestFullscreen || lb.mozRequestFullScreen;
+    if (req) {
+      req.call(lb).catch(function() {});
+    } else {
+      /* Fallback iOS */
+      lb.classList.add('force-landscape');
+    }
+  }
+};
 
 document.addEventListener('DOMContentLoaded', function() {
 
   /* ── LIGHTBOX : boutons et raccourcis ── */
-  var lb       = lbGetEl('lightbox');
+  var lb    = lbGetEl('lightbox');
   var btnClose = lbGetEl('lbClose');
   var btnPrev  = lbGetEl('lbPrev');
   var btnNext  = lbGetEl('lbNext');
-  var btnFs    = lbGetEl('lbFullscreen');
 
   if (btnClose) btnClose.addEventListener('click', lbClose);
   if (btnPrev)  btnPrev.addEventListener('click',  function() { lbGo(-1); });
   if (btnNext)  btnNext.addEventListener('click',  function() { lbGo(1); });
 
-  /* Bouton plein écran manuel (desktop) */
+  /* Bouton plein écran manuel */
+  var btnFs = lbGetEl('lbFullscreen');
+
+  function enterFullscreen() {
+    if (!lb) return;
+    var req = lb.requestFullscreen || lb.webkitRequestFullscreen || lb.mozRequestFullScreen;
+    if (req) {
+      req.call(lb).catch(function() {});
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(function() {});
+      }
+      if (btnFs) { btnFs.querySelector('span').textContent = 'Quitter'; btnFs.classList.add('is-fullscreen'); }
+    } else {
+      lb.classList.add('force-landscape');
+      if (btnFs) { btnFs.querySelector('span').textContent = 'Quitter'; btnFs.classList.add('is-fullscreen'); }
+    }
+  }
+
+  function exitFullscreen() {
+    var ex = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
+    if (ex && (document.fullscreenElement || document.webkitFullscreenElement)) {
+      ex.call(document).catch(function() {});
+    }
+    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+    if (lb) lb.classList.remove('force-landscape');
+    if (btnFs) { btnFs.querySelector('span').textContent = 'Plein écran'; btnFs.classList.remove('is-fullscreen'); }
+  }
+
   if (btnFs) {
     btnFs.addEventListener('click', function() {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      } else if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().catch(function() {});
-      }
-    });
-    ['fullscreenchange','webkitfullscreenchange'].forEach(function(ev) {
-      document.addEventListener(ev, function() {
-        var isFs = !!document.fullscreenElement;
-        var span = btnFs.querySelector('span');
-        if (span) span.textContent = isFs ? 'Quitter' : 'Plein écran';
-        btnFs.classList.toggle('is-fullscreen', isFs);
-      });
+      if (btnFs.classList.contains('is-fullscreen')) exitFullscreen();
+      else enterFullscreen();
     });
   }
 
-  /* Clavier et fond */
+  /* Sync si l'utilisateur quitte le FS via Escape ou geste système */
+  ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange'].forEach(function(ev) {
+    document.addEventListener(ev, function() {
+      var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      if (!isFs) {
+        if (lb) lb.classList.remove('force-landscape');
+        if (btnFs) { btnFs.querySelector('span').textContent = 'Plein écran'; btnFs.classList.remove('is-fullscreen'); }
+      }
+    });
+  });
+
   if (lb) {
     lb.addEventListener('click', function(e) {
       if (e.target === lb) lbClose();
     });
   }
+
   document.addEventListener('keydown', function(e) {
     var lb2 = lbGetEl('lightbox');
     if (!lb2 || lb2.hidden) return;
@@ -244,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  /* ── CARROUSEL AVIS : pause au clic + swipe mobile ── */
+  /* ── CARROUSEL AVIS ── */
   var track = lbGetEl('carousel-track');
   var outer = track ? track.parentElement : null;
   var hint  = document.querySelector('.carousel-hint');
@@ -259,6 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     track.addEventListener('click', function() { setPaused(!isPaused); });
+
     if (outer) {
       var swipeStartX = 0, swipeStartT = 0, swipeOffset = 0;
       var cardW = 295 + 12;
@@ -303,4 +331,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-}); /* fin DOMContentLoaded */
+});
