@@ -208,8 +208,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  /* ── CARROUSEL AVIS : pause au clic / tap ── */
+  /* ── CARROUSEL AVIS : pause au clic + swipe mobile ── */
   var track = lbGetEl('carousel-track');
+  var outer = track ? track.parentElement : null;
   var hint  = document.querySelector('.carousel-hint');
   if (track) {
     var isPaused = false;
@@ -221,17 +222,40 @@ document.addEventListener('DOMContentLoaded', function() {
         hint.classList.toggle('is-paused', val);
       }
     }
+    /* Clic souris = toggle pause */
     track.addEventListener('click', function() { setPaused(!isPaused); });
-    var ctx = 0, ctt = 0;
-    track.addEventListener('touchstart', function(e) {
-      ctx = e.changedTouches[0].clientX;
-      ctt = Date.now();
-    }, { passive: true });
-    track.addEventListener('touchend', function(e) {
-      if (Math.abs(e.changedTouches[0].clientX - ctx) < 10 && Date.now() - ctt < 200) {
-        setPaused(!isPaused);
-      }
-    }, { passive: true });
+
+    /* Swipe mobile : glisser le doigt fait défiler les avis */
+    if (outer) {
+      var swipeStartX = 0, swipeStartT = 0, swipeOffset = 0;
+      var cardW = 295 + 12;
+      outer.addEventListener('touchstart', function(e) {
+        swipeStartX = e.changedTouches[0].clientX;
+        swipeStartT = Date.now();
+        setPaused(true);
+        track.style.transition = 'none';
+      }, { passive: true });
+      outer.addEventListener('touchmove', function(e) {
+        var dx = e.changedTouches[0].clientX - swipeStartX;
+        track.style.transform = 'translateX(' + (swipeOffset + dx) + 'px)';
+      }, { passive: true });
+      outer.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - swipeStartX;
+        var dt = Date.now() - swipeStartT;
+        /* Tap court sans déplacement = toggle pause */
+        if (Math.abs(dx) < 10 && dt < 250) {
+          track.style.transform = 'translateX(' + swipeOffset + 'px)';
+          return;
+        }
+        swipeOffset += dx;
+        var maxOffset = -(cardW * 9);
+        if (swipeOffset > 0) swipeOffset = 0;
+        if (swipeOffset < maxOffset) swipeOffset = maxOffset;
+        swipeOffset = Math.round(swipeOffset / cardW) * cardW;
+        track.style.transition = 'transform .3s ease';
+        track.style.transform = 'translateX(' + swipeOffset + 'px)';
+      }, { passive: true });
+    }
   }
 
   /* ── NEWSLETTER ── */
