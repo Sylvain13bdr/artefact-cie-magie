@@ -539,26 +539,54 @@ section { position: relative; z-index: 1; }
   .lb-fullscreen { top: .5rem; left: .5rem; padding: .35rem .8rem .35rem .5rem; font-size: .72rem; }
 }
 
-/* Fallback plein écran iOS (force-landscape class ajoutée par JS) */
-#lightbox.force-landscape {
-  padding: .4rem 3.5rem;
-  flex-direction: row;
+/* ── VIDÉO EN PLEIN ÉCRAN ── */
+#lightbox:fullscreen video,
+#lightbox:-webkit-full-screen video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+  background: #000;
 }
-#lightbox.force-landscape .lb-img-wrap {
-  max-height: 100vh;
-  max-width: calc(100vw - 7rem);
+
+/* Fallback iOS force-landscape */
+.force-landscape {
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  background: #000;
 }
-#lightbox.force-landscape #lbImg {
-  max-height: 100vh;
-  max-width: 100%;
-  border-radius: 4px;
+
+/* ── BOUTON TEASER (remplace la video inline) ── */
+.teaser-play-btn {
+  position: relative; display: block; width: 100%;
+  border: none; padding: 0; cursor: pointer; background: none;
+  border-radius: 14px; overflow: hidden;
 }
-#lightbox.force-landscape .lb-caption,
-#lightbox.force-landscape .lb-credit { display: none; }
-#lightbox.force-landscape .lb-close { top: .5rem; right: .5rem; width: 34px; height: 34px; }
-#lightbox.force-landscape .lb-nav { width: 40px; height: 40px; }
-#lightbox.force-landscape .lb-prev { left: .4rem; }
-#lightbox.force-landscape .lb-next { right: .4rem; }
+.teaser-play-btn img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  display: block; border-radius: 14px;
+  filter: brightness(.75);
+  transition: filter .25s;
+}
+.teaser-play-btn:hover img { filter: brightness(.9); }
+.teaser-play-icon {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,.9);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; color: var(--deep);
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
+  transition: transform .2s, background .2s;
+  pointer-events: none;
+  padding-left: 4px; /* optique pour centrer le triangle ▶ */
+}
+.teaser-play-btn:hover .teaser-play-icon {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: white;
+}
 
 /* Pied de carte spectacle */
 .sc-footer { padding: 0 1.3rem 1.3rem; display: flex; flex-direction: column; gap: .6rem; }

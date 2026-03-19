@@ -159,7 +159,10 @@
             <div class="sa">Auteur et mise en scène : Anthony Ravion<br>Interprètes : Manon Prophette, Aurélie Dupré, Anthony Ravion, en alternance Julien Bouhitem</div>
           </div>
           <div class="show-teaser">
-            <video src="assets/videos/teasers/teaser-fantaisies.mp4" poster="assets/img/poster-fantaisies.jpg" controls preload="none" aria-label="Teaser Fantaisies et Sorcelleries"></video>
+            <button class="teaser-play-btn" onclick="window.openLightbox('assets/videos/teasers/teaser-fantaisies.mp4', 0, true)" aria-label="Voir le teaser Fantaisies et Sorcelleries">
+              <img src="assets/img/poster-fantaisies.jpg" alt="Teaser Fantaisies et Sorcelleries" />
+              <span class="teaser-play-icon">▶</span>
+            </button>
           </div>
           <div class="show-photos">
             <button class="photo-thumb-btn" onclick="window.openLightbox('fantaisies',0)" aria-label="Voir les 6 photos — Fantaisies et Sorcelleries">
@@ -185,7 +188,10 @@
             <div class="sa">Auteur : Aurélie Dupré · Mise en scène : Manon Prophette<br>Interprètes : Aurélie Dupré, Anthony Ravion</div>
           </div>
           <div class="show-teaser">
-            <video src="assets/videos/teasers/teaser-petitchap.mp4" poster="assets/img/poster-petitchap.jpg" controls preload="none" aria-label="Teaser Le Petit Chap'"></video>
+            <button class="teaser-play-btn" onclick="window.openLightbox('assets/videos/teasers/teaser-petitchap.mp4', 0, true)" aria-label="Voir le teaser Le Petit Chap'">
+              <img src="assets/img/poster-petitchap.jpg" alt="Teaser Le Petit Chap'" />
+              <span class="teaser-play-icon">▶</span>
+            </button>
           </div>
           <div class="show-photos">
             <button class="photo-thumb-btn" onclick="window.openLightbox('petitchap',0)" aria-label="Voir les 6 photos — Le Petit Chap'">
@@ -322,6 +328,7 @@
       <span>Plein écran</span>
     </button>
     <div class="lb-img-wrap">
+      <video id="lbVideo" playsinline webkit-playsinline controls style="display:none; width:100%; height:100%; background:#000;"></video>
       <img id="lbImg" src="" alt="" />
     </div>
     <div class="lb-caption">
@@ -474,7 +481,7 @@
             <div>
               <div class="clabel">Email</div>
               <div class="cval">
-                <a href="mailto:Cieartefact@gmail.com">Cieartefact@gmail.com</a>
+                <a href="/cdn-cgi/l/email-protection#480b212d293a3c2d2e292b3c082f25292124662b2725"><span class="__cf_email__" data-cfemail="aeedc7cbcfdcdacbc8cfcddaeec9c3cfc7c280cdc1c3">[email&#160;protected]</span></a>
               </div>
             </div>
           </div>

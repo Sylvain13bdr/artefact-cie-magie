@@ -36,7 +36,7 @@ var PHOTOS = {
   ],
   'bois-dormant': [
     ['assets/img/photos/bois-dormant/bois-dormant-01.png', 'Les Reves du Bois Dormant — photo 1'],
-    ['assets/img/photos/bois-dormant/bois-dormant-02.png', 'Les Reves du Bois Dormant — photo 3'],
+    ['assets/img/photos/bois-dormant/bois-dormant-02.png', 'Les Reves du Bois Dormant — photo 2'],
     ['assets/img/photos/bois-dormant/bois-dormant-03.png', 'Les Reves du Bois Dormant — photo 3'],
     ['assets/img/photos/bois-dormant/bois-dormant-04.png', 'Les Reves du Bois Dormant — photo 4'],
     ['assets/img/photos/bois-dormant/bois-dormant-05.png', 'Les Reves du Bois Dormant — photo 5'],
@@ -79,37 +79,75 @@ function lbGo(dir) {
 }
 
 function lbClose() {
-  var lb = lbGetEl('lightbox');
-  if (lb) lb.hidden = true;
+  var lb    = lbGetEl('lightbox');
+  var video = lbGetEl('lbVideo');
+
+  if (video) { video.pause(); video.src = ''; video.style.display = 'none'; }
+  var img = lbGetEl('lbImg'); if (img) img.style.display = 'block';
+  var prev = lbGetEl('lbPrev'); var next = lbGetEl('lbNext');
+  var cap  = document.querySelector('.lb-caption');
+  var cred = document.querySelector('.lb-credit');
+  if (prev) prev.style.display = ''; if (next) next.style.display = '';
+  if (cap)  cap.style.display  = ''; if (cred) cred.style.display = '';
+
+  if (lb) { lb.hidden = true; lb.classList.remove('force-landscape'); }
   document.body.style.overflow = '';
-  
-  /* Quitter le mode plein écran à la fermeture si actif */
+
   var ex = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
   if (ex && (document.fullscreenElement || document.webkitFullscreenElement)) {
     ex.call(document).catch(function() {});
   }
 }
 
-window.openLightbox = function(show, idx) {
-  var photos = PHOTOS[show];
-  if (!photos) return;
-  var lb  = lbGetEl('lightbox');
-  var btn = lbGetEl('lbClose');
+window.openLightbox = function(show, idx, isVideo) {
+  var lb    = lbGetEl('lightbox');
+  var img   = lbGetEl('lbImg');
+  var video = lbGetEl('lbVideo');
+  var prev  = lbGetEl('lbPrev');
+  var next  = lbGetEl('lbNext');
+  var cap   = document.querySelector('.lb-caption');
+  var cred  = document.querySelector('.lb-credit');
+  var btn   = lbGetEl('lbClose');
+
   if (!lb) return;
-  lbShow = show;
-  lbIdx  = idx || 0;
-  lbRender();
+
   lb.hidden = false;
   document.body.style.overflow = 'hidden';
   if (btn) btn.focus();
 
-  /* Passage automatique en plein écran si l'appareil est en mode paysage */
+  if (isVideo) {
+    /* ── Mode vidéo ── */
+    if (img)  { img.style.display  = 'none'; }
+    if (prev) { prev.style.display = 'none'; }
+    if (next) { next.style.display = 'none'; }
+    if (cap)  { cap.style.display  = 'none'; }
+    if (cred) { cred.style.display = 'none'; }
+    if (video) {
+      video.style.display = 'block';
+      video.src = show;
+      video.play().catch(function() {});
+    }
+  } else {
+    /* ── Mode photo ── */
+    var photos = PHOTOS[show];
+    if (!photos) return;
+    lbShow = show;
+    lbIdx  = idx || 0;
+    lbRender();
+    if (video) { video.style.display = 'none'; }
+    if (img)   { img.style.display   = 'block'; }
+    if (prev)  { prev.style.display  = ''; }
+    if (next)  { next.style.display  = ''; }
+    if (cap)   { cap.style.display   = ''; }
+    if (cred)  { cred.style.display  = ''; }
+  }
+
+  /* Plein écran automatique en mode paysage */
   if (window.innerWidth > window.innerHeight) {
     var req = lb.requestFullscreen || lb.webkitRequestFullscreen || lb.mozRequestFullScreen;
     if (req) {
       req.call(lb).catch(function() {});
     } else {
-      /* Fallback iOS */
       lb.classList.add('force-landscape');
     }
   }
