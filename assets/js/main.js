@@ -112,25 +112,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
   /* Bouton plein écran */
   var btnFs = lbGetEl('lbFullscreen');
-  function toggleFullscreen() {
+
+  function enterFullscreen() {
     if (!lb) return;
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-      var req = lb.requestFullscreen || lb.webkitRequestFullscreen;
-      if (req) req.call(lb);
-      if (btnFs) btnFs.classList.add('is-fullscreen');
+    /* Tentative API Fullscreen (desktop + Android Chrome) */
+    var req = lb.requestFullscreen || lb.webkitRequestFullscreen || lb.mozRequestFullScreen;
+    if (req) {
+      req.call(lb).catch(function() {});
+      /* Tenter aussi le verrouillage de l'orientation en paysage */
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(function() {});
+      }
+      if (btnFs) { btnFs.querySelector('span').textContent = 'Quitter'; btnFs.classList.add('is-fullscreen'); }
     } else {
-      var ex = document.exitFullscreen || document.webkitExitFullscreen;
-      if (ex) ex.call(document);
-      if (btnFs) btnFs.classList.remove('is-fullscreen');
+      /* Fallback iOS : forcer le CSS paysage plein écran */
+      lb.classList.add('force-landscape');
+      if (btnFs) { btnFs.querySelector('span').textContent = 'Quitter'; btnFs.classList.add('is-fullscreen'); }
     }
   }
-  if (btnFs) btnFs.addEventListener('click', toggleFullscreen);
-  /* Sync état bouton si l'utilisateur quitte le FS autrement (Escape) */
-  document.addEventListener('fullscreenchange', function() {
-    if (btnFs) btnFs.classList.toggle('is-fullscreen', !!document.fullscreenElement);
-  });
-  document.addEventListener('webkitfullscreenchange', function() {
-    if (btnFs) btnFs.classList.toggle('is-fullscreen', !!document.webkitFullscreenElement);
+
+  function exitFullscreen() {
+    var ex = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen;
+    if (ex && (document.fullscreenElement || document.webkitFullscreenElement)) {
+      ex.call(document).catch(function() {});
+    }
+    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+    if (lb) lb.classList.remove('force-landscape');
+    if (btnFs) { btnFs.querySelector('span').textContent = 'Plein écran'; btnFs.classList.remove('is-fullscreen'); }
+  }
+
+  if (btnFs) {
+    btnFs.addEventListener('click', function() {
+      if (btnFs.classList.contains('is-fullscreen')) exitFullscreen();
+      else enterFullscreen();
+    });
+  }
+
+  /* Sync si l'utilisateur quitte le FS via Escape */
+  ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange'].forEach(function(ev) {
+    document.addEventListener(ev, function() {
+      var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      if (!isFs) {
+        if (lb) lb.classList.remove('force-landscape');
+        if (btnFs) { btnFs.querySelector('span').textContent = 'Plein écran'; btnFs.classList.remove('is-fullscreen'); }
+      }
+    });
   });
 
   if (lb) {

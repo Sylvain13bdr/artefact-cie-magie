@@ -437,11 +437,13 @@ section { position: relative; z-index: 1; }
 
 /* ── LIGHTBOX PLEIN ÉCRAN ── */
 #lightbox {
-  position: fixed; inset: 0; z-index: 9999;
-  background: rgba(0,0,0,.95);
+  position: fixed; inset: 0;
+  z-index: 99999; /* au-dessus de tout, y compris la nav */
+  background: #000; /* noir pur, pas de transparence */
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   padding: 1rem;
+  isolation: isolate; /* crée un nouveau contexte d'empilement */
 }
 #lightbox[hidden] { display: none; }
 
@@ -536,6 +538,27 @@ section { position: relative; z-index: 1; }
   .lb-next { right: .4rem; }
   .lb-fullscreen { top: .5rem; left: .5rem; padding: .35rem .8rem .35rem .5rem; font-size: .72rem; }
 }
+
+/* Fallback plein écran iOS (force-landscape class ajoutée par JS) */
+#lightbox.force-landscape {
+  padding: .4rem 3.5rem;
+  flex-direction: row;
+}
+#lightbox.force-landscape .lb-img-wrap {
+  max-height: 100vh;
+  max-width: calc(100vw - 7rem);
+}
+#lightbox.force-landscape #lbImg {
+  max-height: 100vh;
+  max-width: 100%;
+  border-radius: 4px;
+}
+#lightbox.force-landscape .lb-caption,
+#lightbox.force-landscape .lb-credit { display: none; }
+#lightbox.force-landscape .lb-close { top: .5rem; right: .5rem; width: 34px; height: 34px; }
+#lightbox.force-landscape .lb-nav { width: 40px; height: 40px; }
+#lightbox.force-landscape .lb-prev { left: .4rem; }
+#lightbox.force-landscape .lb-next { right: .4rem; }
 
 /* Pied de carte spectacle */
 .sc-footer { padding: 0 1.3rem 1.3rem; display: flex; flex-direction: column; gap: .6rem; }
