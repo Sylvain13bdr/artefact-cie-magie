@@ -828,3 +828,11 @@ section[id], article[id] {
   -webkit-overflow-scrolling: touch;
 }
 
+
+/* Boutons dates cliquables */
+a.dp {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+a.dp:hover { background: rgba(255,204,0,.2); border-color: rgba(255,204,0,.4); }
